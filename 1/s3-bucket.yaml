@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: 2010-09-09      #format version
+
+#Define Resources
+Resources:
+  MyFirstBucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      BucketName: "cloudformation-unique-bucket2020"
+      
+
+#
+
+
+#
