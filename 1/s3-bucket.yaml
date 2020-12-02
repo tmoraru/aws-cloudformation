@@ -5,7 +5,7 @@ Resources:
   MyFirstBucket:
     Type: AWS::S3::Bucket
     Properties: 
-      BucketName: "cloudformation-unique-bucket2020"
+      BucketName: "name of yout bucket"
       
 
 #
