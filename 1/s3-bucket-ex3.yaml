@@ -1,11 +1,14 @@
 AWSTemplateFormatVersion: 2010-09-09      #format version
 
+#How to create multiple buckets into same yaml
+
+
 #Define Resources
 Resources:
   MyFirstBucket:
     Type: AWS::S3::Bucket
     Properties: 
-      BucketName: ""
+      BucketName: "name of bucket"
       Tags:
       - Key: Owner                        #a single variable
         Value: Tatiana
@@ -15,7 +18,21 @@ Resources:
         Value: Managing
       
 
-#
+
+
+
+# My Second S3 Bucket
+  MySecondBucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      BucketName: "name of bucket"
+      Tags:
+      - Key: Owner                        #a single variable
+        Value: Tatiana
+      - Key: Team                       
+        Value: DevOps
+      - Key: App                    
+        Value: Managing
 
 
 #
