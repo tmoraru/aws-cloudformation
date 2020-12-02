@@ -1,0 +1,63 @@
+AWSTemplateFormatVersion: 2010-09-09      #format version
+
+#How to create multiple buckets into same yaml
+
+#Define Parameters
+#Using variables for security reason when we creating a bucket a publish the name to public source code
+Parameters:
+  MyFirstBucketName: 
+    Type: String
+  
+  MySecondBucketName:
+    Type: String
+
+# Tags
+
+  
+  OwnerValue:
+    Type: String
+  TeamValue:
+    Type: String
+  AppValue:
+    Type: String
+    
+  SecondBucketOwnerValue:
+    Type: String
+  SecondBucketTeamValue:
+    Type: String
+  SecondBucketAppValue: 
+    Type: String
+
+
+
+#Define Resources
+Resources:
+  MyFirstBucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      BucketName: !Ref MyFirstBucketName
+      Tags:
+      - Key: Owner                        #a single variable
+        Value: !Ref OwnerValue
+      - Key: Team                       
+        Value: !Ref TeamValue
+      - Key: App                    
+        Value: !Ref AppValue
+      
+
+
+
+
+# My Second S3 Bucket
+  MySecondBucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      BucketName: !Ref MySecondBucketName
+      Tags:
+      - Key: Owner                        #a single variable
+        Value: !Ref SecondBucketOwnerValue
+      - Key: Team                       
+        Value: !Ref SecondBucketTeamValue
+      - Key: App                    
+        Value: !Ref SecondBucketAppValue
+
