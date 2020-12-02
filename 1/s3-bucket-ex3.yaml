@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: 2010-09-09      #format version
+
+#Define Resources
+Resources:
+  MyFirstBucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      BucketName: "name-of bucket"
+      Tags:
+      - Key: Owner                        #a single variable
+        Value: Tatiana
+      - Key: Team                       
+        Value: DevOps
+      - Key: App                    
+        Value: Managing
+      
+
+#
+
+
+#
