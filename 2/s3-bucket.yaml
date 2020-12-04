@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This template provisions a sample S3 bucket
+
+
+# Defines parameters 
+Parameters:
+  SampleBucketName: 
+    Type: String
+    Default: ''
+
+
+
+# Defines Resources 
+Resources: 
+
+
+
+# S3 Bucket
+  SampleS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref  SampleBucketName
+
+# Defines Outputs
+Outputs:
+   # SampleBucketName
+   SampleBucketName:
+     Description: S3 Bucket Name
+     Value: !Ref SampleS3Bucket
