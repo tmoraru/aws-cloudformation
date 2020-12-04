@@ -4,9 +4,18 @@ Description: This template provisions a sample S3 bucket
 
 # Defines parameters 
 Parameters:
+
   SampleBucketName: 
     Type: String
     Default: ''
+
+  TeamValue: 
+    Type: String
+    Default: ''
+  
+  OwnerValue:
+    Type: String
+    Default: 'tanea'
 
 
 
@@ -20,6 +29,15 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref  SampleBucketName
+      # Enable versioning of the bucket
+      VersioningConfiguration:           
+        Status: Enabled 
+
+      Tags:
+      - Key: team
+        Value: !Ref TeamValue
+      - Key: owner
+        Value: !Ref OwnerValue
 
 # Defines Outputs
 Outputs:
