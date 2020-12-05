@@ -1,0 +1,95 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Reusable Template for Wordpress EC2 Instance
+
+# Define Parameters
+Parameters:
+
+  #Define Image ID for EC2 Instance
+  WPImageID:
+    Type: String
+    Default: ami-04d29b6f966df1537
+
+  WPInstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t2.nano
+
+  SubnetID:
+    Type: String
+    Default: subnet-08894880b751013ec
+    AllowedValues:
+      - subnet-08894880b751013ec
+
+  WPSGId:
+    Type: String
+    Default: sg-061493ce4f5dd1257   #Take from template which created a stack for SG
+
+  SSHKeyName:
+    Type: String
+    Default: laptop-key
+
+
+  
+
+  
+
+
+
+  # Required Tags
+  # EC2 Name 
+  EC2Name:
+    Type: String
+    Default: wp-instance
+
+  # Team key
+  TeamTagKey: 
+    Type: String
+    Default: Team
+
+  # Team Value
+  TeamTagValue: 
+    Type: String
+    Default: Infra
+
+  # ENV key
+  EnvTagKey: 
+    Type: String
+    Default: Env
+
+  # ENV Value
+  EnvTagValue: 
+    Type: String
+    Default: Dev
+  
+
+
+# Define Resources
+Resources: 
+  WPInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref WPImageID
+      InstanceType: !Ref WPInstanceType
+      SubnetId: !Ref SubnetID
+      SecurityGroupIds:
+        - !Ref WPSGId
+      KeyName: !Ref SSHKeyName
+
+      Tags:
+        - Key: Name 
+          Value: !Ref EC2Name
+        - Key: !Ref TeamTagKey
+          Value: !Ref TeamTagValue
+        - Key: !Ref EnvTagKey
+          Value: !Ref EnvTagValue
+
+
+
+# Define Outputs 
+Outputs:
+  InstancePublicIp:
+    Description: Instance Public IP Address
+    Value: !GetAtt WPInstance.PublicIp
+

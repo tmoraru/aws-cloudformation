@@ -7,12 +7,17 @@ Parameters:
   # Default VPC ID
   DefaultVPCId:
     Type: String
-    Default: vpc-0a03cd78b513f8932
+    Default: ""
 
   # WPSecurity Group Name
   WPSGName:
     Type: String
     Default: wp-security-group
+
+  # My Network Ip
+  MyNetworkIp:
+    Type: String
+    Default: ""     # I used my IPaddress, in order to  make cird block i should put /32
 
 
 
@@ -55,6 +60,11 @@ Resources:
       GroupDescription: Wordpress Security Group
       GroupName: !Ref WPSGName
       VpcId: !Ref DefaultVPCId
+      SecurityGroupIngress:
+        - CidrIp: !Ref MyNetworkIp
+          FromPort: 22
+          ToPort: 22
+          IpProtocol: tcp
       Tags:
         - Key: Name
           Value: !Ref WPSGName
