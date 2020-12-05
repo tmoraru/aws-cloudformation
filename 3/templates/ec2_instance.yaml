@@ -7,7 +7,7 @@ Parameters:
   #Define Image ID for EC2 Instance
   WPImageID:
     Type: String
-    Default: ami-04d29b6f966df1537
+    Default: ""
 
   WPInstanceType:
     Type: String
@@ -18,17 +18,17 @@ Parameters:
 
   SubnetID:
     Type: String
-    Default: subnet-08894880b751013ec
+    Default: ""
     AllowedValues:
-      - subnet-08894880b751013ec
+      - ""
 
   WPSGId:
     Type: String
-    Default: sg-061493ce4f5dd1257   #Take from template which created a stack for SG
+    Default: ""   #Take from template which created a stack for SG
 
   SSHKeyName:
     Type: String
-    Default: laptop-key
+    Default: ""
 
 
   
