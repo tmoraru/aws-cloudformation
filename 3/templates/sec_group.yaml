@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Reusable Template for Security Group
+
+# Define Parameters
+Parameters:
+
+  # Default VPC ID
+  DefaultVPCId:
+    Type: String
+    Default: vpc-0a03cd78b513f8932
+
+  # WPSecurity Group Name
+  WPSGName:
+    Type: String
+    Default: wp-security-group
+
+
+
+  # Required Tags
+
+  # Team key
+  TeamTagKey: 
+    Type: String
+    Default: Team
+
+  # Team key
+  TeamTagKey: 
+    Type: String
+    Default: Team
+
+  # Team Value
+  TeamTagValue: 
+    Type: String
+    Default: Infra
+
+  # ENV key
+  EnvTagKey: 
+    Type: String
+    Default: Env
+
+  # ENV Value
+  EnvTagValue: 
+    Type: String
+    Default: Dev
+  
+
+
+# Define Resources
+Resources: 
+
+  # Wordpress Security Group
+  WPSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Wordpress Security Group
+      GroupName: !Ref WPSGName
+      VpcId: !Ref DefaultVPCId
+      Tags:
+        - Key: Name
+          Value: !Ref WPSGName
+        - Key: !Ref TeamTagKey
+          Value: !Ref TeamTagValue
+        - Key: !Ref EnvTagKey
+          Value: !Ref EnvTagValue
+
+
+# Define Outputs
+Outputs:
+  WPSGName:
+    Description:  Wordpress Security Name
+    Value: !Ref WPSecurityGroup 
+
