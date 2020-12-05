@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Reusable Template for AWS RDS
+
+
+# Define Parameters
+Parameters:
+
+  # Define Master Username
+  MasterName: 
+    Type: String
+    Default: ""
+    Description: Master Username
+  # Define Master Password
+  MasterPass: 
+    Type: String
+    Default: ""
+    Description: Master Pass
+
+
+
+
+  # Define Sub1
+  Subnet1:
+    Type: String
+    Default: ""
+
+   # Define Sub1
+  Subnet2:
+    Type: String
+    Default: ""
+
+
+
+# Define Resources
+Resources:
+  # Database Subnet Group
+  RDSSubnetGroup:  #Logical Id
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: String
+      DBSubnetGroupName: WordPressSubGrp
+      SubnetIds:
+        - !Ref Subnet1
+        - !Ref Subnet2
+      
+
+
+  # Database Security Group
+  # RDSSecurityGroup:
+  #   Type: AWS::RDS::DBSecurityGroup
+  #   Properties: 
+  #     DBSecurityGroupIngress: 
+  #       EC2SecurityGroupId: sg-0eaa1543a079e5b4f #SG which was created
+  #     EC2VpcId: vpc-0a03cd78b513f8932
+  #     GroupDescription: Wordpress DB Security Group
+
+
+  # Define Wordpress RDS
+  WordPressRDS:        #Logical ID of my resource
+    Type: AWS::RDS::DBInstance
+    Properties: 
+      Engine: mariadb
+      EngineVersion: 10.4.8
+      DBInstanceClass: db.t2.micro
+      DBName: WordPressDB
+      MasterUsername: !Ref MasterName
+      MasterUserPassword: !Ref MasterPass
+      StorageType: gp2
+      AllocatedStorage: 20
+      MaxAllocatedStorage: 50
+      DBSubnetGroupName: !Ref RDSSubnetGroup # Reference Logical Id
+      PubliclyAccessible: false
+      BackupRetentionPeriod: 0
+      DeletionProtection: false
+
+
+# Define Outputs 
+Outputs:
+  DBName: 
+    Description: Wordpress Public IP Address
+    Value: !Ref WordPressRDS
